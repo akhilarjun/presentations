@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise vs Observables | Presentation By Akhil Arjun</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+</head>
+<body>
+    <section>
+        <div>
+            <h2>Promise vs Observables</h2>
+            <div class="helper">An over simplified explanation</div>
+            <div class="content">
+                <div style="text-align: right;">- Akhil Arjun</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h1>What is a Promise</h1>
+            <div class="content">
+                <strong>/ˈprɒmɪs/</strong>
+                <div>
+                    A promise is an object that will produce a <u><b>single value</b></u> some time 
+                    in the future: either a resolved value, or a reason that it’s not resolved
+                </div>
+            </div>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise MDN specs</a>
+            </p>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h1>What is Observables</h1>
+            <div class="content">
+                <strong>/əbˈzəːvəbl/</strong>
+                <div>
+                    An Observable is basically a function that can return a <u><b>stream of 
+                    values</b></u> to an observer over time, this can either be done synchronously or asynchronously.
+                </div>
+            </div>
+            <p>
+                <a href="https://rxjs-dev.firebaseapp.com/guide/observable" target="_blank">RxJS Observables</a>
+            </p>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h2>Major Differences</h2>
+            <div class="content">
+                <ul>
+                    <li>Eager Vs Lazy</li>
+                    <li>Single Output vs Multiple Output</li>
+                    <li>Synchronous vs Asynchronous</li>
+                    <li>Operators</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Eager vs Lazy</h3>
+            <div class="content">
+                <div>
+                    <strong>Promises are always Eager</strong>
+                    <div>
+                        Code execution is always eagerly done ("immediately")
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const greetingPoster = new Promise((resolve, reject) => {
+    console.log('Inside Promise (proof of being eager)');
+    resolve('Welcome! Nice to meet you.');
+});
+
+console.log('Before calling then on Promise');
+
+greetingPoster.then(res => 
+    console.log(`Greeting from promise: ${res}`)
+);</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo1"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo1()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Eager vs Lazy</h3>
+            <div class="content">
+                <div>
+                    <strong>Observables are always Lazy</strong>
+                    <div>
+                        Observables take a call back function that is only executed each time 
+                        an observer subscribes to it thereby Lazy.
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const { Observable } = rxjs;
+
+const greetingLady$ = new Observable(observer => {
+    console.log('Inside Observable (proof of being lazy)');
+    observer.next('Hello! I am glad to get to know you.');
+});
+
+console.log('Before calling subscribe on Observable');
+
+greetingLady$.subscribe({
+    next: console.log
+});</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo2"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo2()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Single Output vs Multiple Output</h3>
+            <div class="content">
+                <div>
+                    <strong>Promises can only output single value</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const getTimePromise = new Promise((resolve, reject) => {
+    interval = setInterval(() => {
+        console.log('Fetching Time');
+        resolve(new Date().toLocaleTimeString());
+    }, 1000);
+
+    setTimeout(() => {
+        console.log ('Timer stopped')
+        clearInterval(interval)
+    }, 5000);
+});
+
+getTimePromise.then(res => 
+    console.log(`Time: ${res}`)
+);</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo3"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo3()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Single Output vs Multiple Output</h3>
+            <div class="content">
+                <div>
+                    <strong>Observables can output multiple values</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const { Observable } = rxjs;
+
+const getTimeObservable = new Observable(observer => {
+    let interval = setInterval(() => {
+        console.log('Fetching Time');
+        observer.next(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => {
+        clearInterval(interval);
+    }
+});
+
+const subscription = getTimeObservable.subscribe(res => 
+    console.log(`Time: ${res}`)
+);
+
+setTimeout(() => {
+    subscription.unsubscribe();
+    console.log ('Timer stopped')
+}, 5000);</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo4"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo4()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Synchronous vs Asynchronous</h3>
+            <div class="content">
+                <div>
+                    <strong>Promises are always asynchronous</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const asynchronousPromise = new Promise((resolve, reject) => {
+    resolve ('I am Asynchronous')
+});
+
+console.log(`This will be printed First`);
+
+asynchronousPromise.then(res => {
+    console.log(`This will be printed Last`);
+    console.log(res);
+});
+
+console.log(`This will be printed Second`)</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo5"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo5()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Synchronous vs Asynchronous</h3>
+            <div class="content">
+                <div>
+                    <strong>Observables are synchronous by nature but can be made asynchronous</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers smaller"><code class="language-js">const { Observable } = rxjs;
+console.log(`Synchronous Demo`)
+const synchronousObservable = new Observable(observer => {
+    observer.next('I am Synchronous');
+});
+synchronousObservable.subscribe(res => {
+    console.log (res);
+});
+console.log(`This will be printed Second`);
+
+console.log(`Asynchronous Demo`)
+const asynchronousObservable = new Observable(observer => {
+    observer.next('I am Asynchronous');
+});
+asynchronousObservable.subscribe(res => {
+    setTimeout(() => {
+        console.log (res);
+    }, 1);
+});
+console.log(`This will be printed before async subscription`)</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo6"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo6()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Observable Operators!</h3>
+            <div class="content">
+                <div>
+                    <strong></strong>
+                    <div>
+                        RxJs provides a lot of operators that can be chained to an observable, 
+                        which returns a new observable.
+                        <p><a href="https://www.learnrxjs.io/learn-rxjs/operators" target="_blank">List of Operators</a></p>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers smaller"><code class="language-js">const { Observable, timer } = rxjs;
+const { map, takeUntil } = rxjs.operators;                                    
+const msgs = ['Hey There', 'Whatsup!', 'Long Time', 'BuhBye'];
+const interval$ = timer(0, 1000);
+const timer$ = timer(msgs.length*1000);
+const notificationObs = new Observable(observer => {
+    interval$.pipe(takeUntil(timer$)).subscribe(val => {
+        observer.next(msgs[val]);
+    });
+})
+const enhancedObs = notificationObs.pipe(
+    map(msg => `${msg} ${new Date().toLocaleTimeString()}`)
+);
+enhancedObs.subscribe(res => {
+    console.log(res)
+})</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo7"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo7()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h1>Thank You!</h1>
+        </div>
+    </section>
+    <!-- <script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.12/dist/global/Rx.js"></script> -->
+    <script src="https://unpkg.com/@reactivex/rxjs@6.6.3/dist/global/rxjs.umd.js"></script>
+    <script src="../assets/js/prism.js"></script>
+    <script src="./promise-vs-observable.js"></script>
+</body>
+</html>

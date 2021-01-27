@@ -57,6 +57,16 @@ section h1 {
   font-size: 100px;
   margin: 0;
 }
+section h2 {
+  font-weight: 700;
+  font-size: 80px;
+  margin: 0;
+}
+section h3 {
+  font-weight: 700;
+  font-size: 60px;
+  margin: 0;
+}
 section .helper {
   font-size: 50px;
   font-weight: 200;
@@ -67,4 +77,42 @@ section div.content {
   font-size: 30px;
   margin-top: 20px;
   text-align: justify;
+}
+section pre {
+  font-size: 15px !important;
+}
+section pre.smaller {
+  font-size: 13px !important;
+}
+.cell {
+  flex: 1 100%;
+}
+.run-code {
+  background-color: #333;
+  color: #efefed;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.code-response {
+  padding: 1em;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #2d2d2d;
+  color: #eee;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  margin: 0.5em 0;
+  border-left: 5px solid #cc99cd;
+}
+.code-response::before {
+  content: "$output >";
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.code-response div {
+  width: 100%;
 }
