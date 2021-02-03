@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark Js | Presentation By Akhil Arjun</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+</head>
+<body>
+    <section>
+        <div>
+            <h2>Benchmark.js</h2>
+            <div class="helper">A benchmarking library that supports high-resolution timers & returns statistically significant results</div>
+            <div class="content">
+                <div style="text-align: right;">- Akhil Arjun</div>
+            </div>
+            <p>
+                <a href="https://benchmarkjs.com/" target="_blank">benchmark.js</a>
+            </p>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>String Reverse use-case</h3>
+            <div class="content">
+                <div>
+                    <strong>Option 1</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const str = "Annuity";
+const reverseStr = str.split("").reverse().join('');
+console.log('Using split method: ', reverseStr);</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo1"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo1()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>String Reverse use-case</h3>
+            <div class="content">
+                <div>
+                    <strong>Option 1</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const str = "Annuity";
+const reverseStr = Array.from(str).reverse().join('');
+log('Using Array.from method: ' + reverseStr, 'demo2');</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo2"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo2()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>String Reverse use-case</h3>
+            <div class="content">
+                <div>
+                    <strong>Option 3</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">const str = "Annuity";
+const reverseStr = [...str].reverse().join('');
+log('Using spread method: ' + reverseStr, 'demo3');</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo3"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo3()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>String Reverse use-case</h3>
+            <div class="content">
+                <div>
+                    <strong>Which one is the best?</strong>
+                    <div>
+                        <div class="row">
+                            <div class="cell">
+                                <pre class="line-numbers"><code class="language-js">let suite = new Benchmark.Suite;
+
+// add tests
+suite.add('Split#test', function() {
+    "Annuity".split("");
+})
+.add('Array.from#test', function() {
+    Array.from("Annuity");
+})
+.add('Spread#test', function() {
+    [...'Annuity'];
+})
+// add listeners
+.on('cycle', function(event) {
+    console.log(String(event.target));
+})
+.on('complete', function() {
+    console.log('Fastest is ' + this.filter('fastest').map('name'));
+})
+// run async
+.run({ 'async': true });</code></pre>
+                            </div>
+                            <div class="cell code-response" id="demo4"></div>
+                        </div>
+                    </div>
+                    <button class="run-code" onclick="runDemo4()">Run Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../assets/js/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+    <script src="./benchmark.js"></script>
+    <script src="./benchmark-run-demo.js"></script>
+</body>
+</html>
