@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands | Presentation by Akhil Arjun</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        @media screen and (max-width: 800px) {
+            section div {
+                width: 100%;
+                padding: 25px;
+            }
+            section div.content {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div>
+            <h2>Useful Git Commands</h2>
+            <div class="helper">
+                A collection of useful git commands, and how and what they can be used for.
+            </div>
+            <div class="content">
+                <div style="text-align: right;">- Akhil Arjun</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>1. git status</h3>
+            <div class="content">
+                Git status command is used to identify what changes are tracked and which among those are staged.
+                <pre class="line-numbers"><code class="language-git">git status</code></pre>
+                <ul>
+                    <li>Untracked files are the ones which are newly added and not tracked for next commit</li>
+                    <li>Changes not staged are the ones which are tracked but not added to the list for next commit</li>
+                    <li>Staged changes are tracked changes ready to be commited</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>2. git add</h3>
+            <div class="content">
+                Git add command is used to stage changes.
+                <pre class="line-numbers"><code class="language-git">git add file_name</code></pre>
+                Add command can also be used to add multiple files. File names should be seperated by space
+                <pre class="line-numbers"><code class="language-git">git add file_name_1 file_name_2</code></pre>
+                If you want to add all the files that were changed use dot operator.
+                <pre class="line-numbers"><code class="language-git">git add .</code></pre>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>3. git reset</h3>
+            <div class="content">
+                Git reset is used to unstage a file from the list of files to be commited
+                <pre class="line-numbers"><code class="language-git">git reset file_name</code></pre>
+                Reset command can also be used to reset multiple files. File names should be seperated by space
+                <pre class="line-numbers"><code class="language-git">git reset file_name_1 file_name_2</code></pre>
+                If you want to reset all the files that were changed use dot operator.
+                <pre class="line-numbers"><code class="language-git">git reset .</code></pre>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>4. git commit</h3>
+            <div class="content">
+                Git commit is used to commit all the staged changes to remote.
+                <pre class="line-numbers"><code class="language-git">git commit -m "git commit message here"</code></pre>
+                Commit command can also be used to add unstaged changes and then commit it by 
+                passing an additional flag of 'a'.
+                <pre class="line-numbers"><code class="language-git">git commit -am "git commit message here"</code></pre>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>5. git pull</h3>
+            <div class="content">
+                Git pull is used to pull all the latest changes from remote. it can be called with or without options<br/>
+                We can call this method without any options and it will pull all the changes for the current working branch from remote
+                <pre class="line-numbers"><code class="language-git">git pull</code></pre>
+                Or we can pull changes from a specified branch on to the current working branch
+                <pre class="line-numbers"><code class="language-git">git pull REMOTE_NAME BRANCH_NAME</code></pre>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>git pull (contd...)</h3>
+            <div class="content">
+                Git pull runs <code class="language-git">git fetch</code> internally. Fetch command syncs the local repository
+                with the remote repo.<br/>
+                We can also run fetch command for all branches
+                <pre class="line-numbers"><code class="language-git">git fetch --all</code></pre>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>6. git merge</h3>
+            <div class="content">
+                Git merge is used to merge the latest changes from target branch to the working branch
+                <pre class="line-numbers"><code class="language-git">git merge target_branch</code></pre>
+            </div>
+        </div>
+    </section>
+    <script src="../assets/js/prism.js"></script>
+</body>
+</html>
