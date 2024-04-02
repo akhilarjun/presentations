@@ -111,11 +111,11 @@ section pre.smaller {
 }
 .code-response {
 	padding: 1em;
-	font-size: 15px;
+	font-size: 12px;
 	line-height: 1.5;
 	font-weight: 400;
 	background-color: #2d2d2d;
-	color: #eee;
+	color: seagreen;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	margin: 0.5em 0;
 	border-left: 5px solid #cc99cd;
@@ -125,6 +125,7 @@ section pre.smaller {
 	font-weight: 700;
 	font-size: 18px;
 	margin-bottom: 10px;
+	color: yellow;
 }
 .code-response div {
 	width: 100%;
@@ -132,7 +133,7 @@ section pre.smaller {
 @media only screen and (max-width: 1100px) {
 	section > div {
 		width: auto;
-		max-width: 80%;
+		width: 80%;
 	}
 	section h1 {
 		font-weight: 500;
@@ -199,5 +200,8 @@ section pre.smaller {
 		text-align: center;
 		opacity: 0.5;
 		font-size: 20px;
+	}
+	.code-response {
+		max-height: 150px;
 	}
 }
