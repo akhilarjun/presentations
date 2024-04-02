@@ -26,6 +26,12 @@ body {
 	background-color: #efefed;
 	counter-reset: section;
 	height: 100%;
+	background: linear-gradient(135deg, #eceddc 25%, transparent 25%) -50px 0,
+		linear-gradient(225deg, #eceddc 25%, transparent 25%) -50px 0,
+		linear-gradient(315deg, #eceddc 25%, transparent 25%),
+		linear-gradient(45deg, #eceddc 25%, transparent 25%);
+	background-size: 100px 100px;
+	background-color: #e5e5e5;
 }
 .row {
 	display: flex;
@@ -40,6 +46,8 @@ section {
 	flex: none;
 	counter-increment: section;
 	position: relative;
+	background: radial-gradient(rgba(255, 255, 255, 0.8), transparent);
+	backdrop-filter: blur(3px);
 }
 section:after {
 	content: counter(section);
@@ -147,12 +155,13 @@ section pre.smaller {
 	section div.content {
 		font-weight: 300;
 		font-size: 30px;
+		text-align: left;
 	}
 	section:after {
 		font-weight: 500;
 		bottom: 20px;
 		right: 20px;
-		opacity: 0.2;
+		opacity: 0.5;
 		font-size: 30px;
 	}
 }
@@ -188,7 +197,7 @@ section pre.smaller {
 		left: 50%;
 		transform: translateX(-50%);
 		text-align: center;
-		opacity: 0.2;
+		opacity: 0.5;
 		font-size: 20px;
 	}
 }
