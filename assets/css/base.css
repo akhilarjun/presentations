@@ -201,6 +201,9 @@ section pre.smaller {
 		opacity: 0.5;
 		font-size: 20px;
 	}
+	.cell {
+		max-height: 250px;
+	}
 	.code-response {
 		max-height: 100px;
 		font-size: 10px;
